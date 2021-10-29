@@ -1,6 +1,7 @@
-package com.example.appspring.student;
+package com.example.appspring.Repository;
 
 
+import com.example.appspring.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

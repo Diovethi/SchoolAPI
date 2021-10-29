@@ -1,6 +1,7 @@
-package com.example.appspring.student;
+package com.example.appspring.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.appspring.Model.Student;
+import com.example.appspring.Service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,21 +1,14 @@
-package com.example.appspring.person;
+package com.example.appspring.Model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
-@Entity
-@Table
+@MappedSuperclass
 public abstract class Person {
     @Id
-    @SequenceGenerator(
-            name="person_sequence",
-            sequenceName = "person_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "person_sequence"
+            strategy = GenerationType.AUTO
     )
     private Long id;
     private String name;

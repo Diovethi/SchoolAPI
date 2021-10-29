@@ -1,4 +1,6 @@
-package com.example.appspring.teacher;
+package com.example.appspring.Config;
+import com.example.appspring.Model.Teacher;
+import com.example.appspring.Repository.TeacherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

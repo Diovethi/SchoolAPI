@@ -1,5 +1,7 @@
-package com.example.appspring.student;
+package com.example.appspring.Config;
 
+import com.example.appspring.Model.Student;
+import com.example.appspring.Repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,7 @@
-package com.example.appspring.teacher;
+package com.example.appspring.Controller;
 
+import com.example.appspring.Model.Teacher;
+import com.example.appspring.Service.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;

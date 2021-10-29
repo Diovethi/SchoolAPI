@@ -1,6 +1,8 @@
-package com.example.appspring.teacher;
+package com.example.appspring.Service;
 
 import com.example.appspring.Exceptions.NotFoundException;
+import com.example.appspring.Model.Teacher;
+import com.example.appspring.Repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
