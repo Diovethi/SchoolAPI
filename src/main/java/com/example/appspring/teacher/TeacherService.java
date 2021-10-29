@@ -1,5 +1,6 @@
 package com.example.appspring.teacher;
 
+import com.example.appspring.Exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,7 +33,7 @@ public class TeacherService {
     public void deleteTeacher(Long teacherId) {
         boolean exists = teacherRepository.existsById(teacherId);
         if (!exists)
-            throw new IllegalStateException("student with id "+teacherId+" does not exist");
+            throw new NotFoundException("student with id "+teacherId+" does not exist");
         else
             teacherRepository.deleteById(teacherId);
 
@@ -41,7 +42,7 @@ public class TeacherService {
     @Transactional
     public void updateTeacher(Long teacherId, String name, String email, LocalDate dob) {
         Teacher teacher= teacherRepository.findById(teacherId)
-                .orElseThrow(() -> new IllegalStateException("student with id "+teacherId+" does not exist"));
+                .orElseThrow(() -> new NotFoundException("student with id "+teacherId+" does not exist"));
         if(email != null)
             teacher.setEmail(email);
         if (name != null)

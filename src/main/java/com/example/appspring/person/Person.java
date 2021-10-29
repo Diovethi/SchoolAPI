@@ -6,7 +6,7 @@ import java.time.Period;
 
 @Entity
 @Table
-public class Person {
+public abstract class Person {
     @Id
     @SequenceGenerator(
             name="person_sequence",
