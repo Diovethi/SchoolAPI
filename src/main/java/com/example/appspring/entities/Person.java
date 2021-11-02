@@ -8,7 +8,7 @@ import java.time.Period;
 public abstract class Person {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
     private Long id;
     private String name;

@@ -22,8 +22,6 @@ public class Lesson {
     private Class classes;
 
 
-
-
     public Lesson() {
     }
 

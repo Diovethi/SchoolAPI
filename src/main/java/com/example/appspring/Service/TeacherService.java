@@ -54,4 +54,7 @@ public class TeacherService {
 
     }
 
+    public Optional<Teacher> getTeacher(Long id) {
+        return teacherRepository.findById(id);
+    }
 }

@@ -3,7 +3,6 @@ package com.example.appspring.Service;
 import com.example.appspring.entities.Student;
 import com.example.appspring.repository.StudentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,9 +19,12 @@ public class StudentService {
     }
 
 
-    @GetMapping
-    public List<Student> getStudent(){
+    public List<Student> getStudents(){
         return studentRepository.findAll();
+    }
+
+    public Optional<Student> getStudent(Long id){
+        return studentRepository.findById(id);
     }
 
     public void addNewStudent(Student student) {

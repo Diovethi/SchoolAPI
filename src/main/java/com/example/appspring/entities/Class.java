@@ -1,11 +1,11 @@
 package com.example.appspring.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Entity
 @Table
-public class Class {
+public class Class implements Serializable {
 
     @Id
     @GeneratedValue(
@@ -14,27 +14,16 @@ public class Class {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "classes")
-    private List<Lesson> lessons;
-
     @OneToOne
     private Teacher  form_teacher;
 
     public Class() {
     }
 
-    public Class(String name, List<Lesson> lessons) {
+    public Class(String name) {
         this.name = name;
-        this.lessons = lessons;
     }
 
-    public List<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
-    }
 
     public Long getId() {
         return id;
