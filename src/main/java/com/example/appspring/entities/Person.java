@@ -1,4 +1,4 @@
-package com.example.appspring.Model;
+package com.example.appspring.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +13,7 @@ public abstract class Person {
     private Long id;
     private String name;
     @Transient
+
     private Integer age;
     private LocalDate dob;
     private String email;

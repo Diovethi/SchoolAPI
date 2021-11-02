@@ -1,6 +1,6 @@
 package com.example.appspring.Controller;
 
-import com.example.appspring.Model.Student;
+import com.example.appspring.entities.Student;
 import com.example.appspring.Service.StudentService;
 import org.springframework.web.bind.annotation.*;
 

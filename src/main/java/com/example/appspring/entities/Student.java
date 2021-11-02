@@ -1,4 +1,4 @@
-package com.example.appspring.Model;
+package com.example.appspring.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;

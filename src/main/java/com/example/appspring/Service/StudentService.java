@@ -1,7 +1,7 @@
 package com.example.appspring.Service;
 
-import com.example.appspring.Model.Student;
-import com.example.appspring.Repository.StudentRepository;
+import com.example.appspring.entities.Student;
+import com.example.appspring.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
