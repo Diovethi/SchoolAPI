@@ -12,8 +12,8 @@ public abstract class Person {
     )
     private Long id;
     private String name;
-    @Transient
 
+    @Transient
     private Integer age;
     private LocalDate dob;
     private String email;

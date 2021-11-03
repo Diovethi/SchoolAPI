@@ -1,6 +1,6 @@
 package com.example.appspring.Service;
 
-import com.example.appspring.Exceptions.NotFoundException;
+import com.example.appspring.Exceptions.ApiRequestException;
 import com.example.appspring.entities.Teacher;
 import com.example.appspring.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
@@ -28,14 +28,14 @@ public class TeacherService {
     public  void addNewTeacher(Teacher teacher) {
         Optional<Teacher> studentOptional = teacherRepository.findTeacherByEmail(teacher.getEmail());
         if (studentOptional.isPresent())
-            throw new IllegalStateException("email taken");
+            throw new ApiRequestException("This email alreaady exists.");
         teacherRepository.save(teacher);
     }
 
     public void deleteTeacher(Long teacherId) {
         boolean exists = teacherRepository.existsById(teacherId);
         if (!exists)
-            throw new NotFoundException("student with id "+teacherId+" does not exist");
+            throw new ApiRequestException("Teacher with id "+teacherId+" does not exist");
         else
             teacherRepository.deleteById(teacherId);
 
@@ -44,7 +44,7 @@ public class TeacherService {
     @Transactional
     public void updateTeacher(Long teacherId, String name, String email, LocalDate dob) {
         Teacher teacher= teacherRepository.findById(teacherId)
-                .orElseThrow(() -> new NotFoundException("student with id "+teacherId+" does not exist"));
+                .orElseThrow(() -> new ApiRequestException("Teacher with id "+teacherId+" does not exist"));
         if(email != null)
             teacher.setEmail(email);
         if (name != null)
@@ -54,7 +54,8 @@ public class TeacherService {
 
     }
 
-    public Optional<Teacher> getTeacher(Long id) {
-        return teacherRepository.findById(id);
+    public Teacher getTeacher(Long id) {
+        return teacherRepository.findById(id)
+                .orElseThrow(() ->  new ApiRequestException("Teacher with id "+id+"  does not exist"));
     }
 }

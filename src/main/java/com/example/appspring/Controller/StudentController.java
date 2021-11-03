@@ -1,14 +1,19 @@
 package com.example.appspring.Controller;
 
+import com.example.appspring.entities.Response;
 import com.example.appspring.entities.Student;
 import com.example.appspring.Service.StudentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
-@RequestMapping(path= "api/student")
+@RequestMapping(path= "/student")
 public class StudentController {
 
     private final StudentService studentService;
@@ -24,13 +29,23 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{studentId}")
-    public Optional<Student> getStudents(@PathVariable Long studentId){
+    public Student getStudent(@PathVariable Long studentId){
         return studentService.getStudent(studentId);
     }
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student){
-        studentService.addNewStudent(student);
+    public ResponseEntity<Response> registerNewStudent(@RequestBody Student student){
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .data(Map.of("Student", studentService.addNewStudent(student)))
+                        .message("Student created successfully.")
+                        .status(HttpStatus.CREATED)
+                        .build()
+                );
+
+
     }
 
     @PutMapping(path = "{studentId}")

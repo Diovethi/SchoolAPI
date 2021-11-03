@@ -1,5 +1,6 @@
 package com.example.appspring.Service;
 
+import com.example.appspring.Exceptions.ApiRequestException;
 import com.example.appspring.entities.Student;
 import com.example.appspring.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -23,30 +24,31 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudent(Long id){
-        return studentRepository.findById(id);
+    public Student getStudent(Long id){
+        return studentRepository.findById(id).orElseThrow(() -> new ApiRequestException("Student with id "+id+" does not exist"));
     }
 
-    public void addNewStudent(Student student) {
+    public Student addNewStudent(Student student) {
         Optional<Student> studentOptional = studentRepository.findStudentByEmail(student.getEmail());
         if (studentOptional.isPresent())
-            throw new IllegalStateException("email taken");
+            throw new ApiRequestException("email taken");
         studentRepository.save(student);
+        return student;
     }
 
-    public void deleteStudent(Long studentId) {
-    boolean exists = studentRepository.existsById(studentId);
+    public void deleteStudent(Long id) {
+    boolean exists = studentRepository.existsById(id);
     if (!exists)
-        throw new IllegalStateException("student with id "+studentId+" does not exist");
+        throw new ApiRequestException("Student with id "+id+" does not exist");
     else
-        studentRepository.deleteById(studentId);
+        studentRepository.deleteById(id);
 
     }
 
     @Transactional
-    public void updateStudentEmailName(Long studentId, String name, String email) {
-        Student student= studentRepository.findById(studentId)
-                .orElseThrow(() -> new IllegalStateException("student with id "+studentId+" does not exist"));
+    public void updateStudentEmailName(Long id, String name, String email) {
+        Student student= studentRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Student with id "+id+" does not exist"));
         if(email != null)
             student.setEmail(email);
         if (name != null)

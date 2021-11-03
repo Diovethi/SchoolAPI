@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path= "api/teacher")
+@RequestMapping(path= "/teacher")
 public class TeacherController {
 
     private final TeacherService teacherService;
@@ -25,7 +25,7 @@ public class TeacherController {
     }
 
     @GetMapping(value="{id}")
-    public Optional<Teacher> getTeacher(@PathVariable Long id){
+    public Teacher getTeacher(@PathVariable Long id){
         return teacherService.getTeacher(id);
     }
 
