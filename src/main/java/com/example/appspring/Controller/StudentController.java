@@ -24,18 +24,35 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents(){
-        return studentService.getStudents();
+    public ResponseEntity<Response> getStudents(){
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .data(Map.of("Students", studentService.getStudents()))
+                        .message("List of Students.")
+                        .status(HttpStatus.CREATED)
+                        .build()
+        );
+
     }
 
     @GetMapping(path = "/{studentId}")
-    public Student getStudent(@PathVariable Long studentId){
-        return studentService.getStudent(studentId);
+    public ResponseEntity<Response> getStudent(@PathVariable Long studentId){
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .data(Map.of("Student", studentService.getStudent(studentId)))
+                        .message("Student searched successfully.")
+                        .status(HttpStatus.CREATED)
+                        .build()
+        );
+
     }
 
     @PostMapping
     public ResponseEntity<Response> registerNewStudent(@RequestBody Student student){
-
         return ResponseEntity.ok(
                 Response.builder()
                         .timestamp(LocalDateTime.now())
@@ -44,20 +61,34 @@ public class StudentController {
                         .status(HttpStatus.CREATED)
                         .build()
                 );
-
-
     }
 
     @PutMapping(path = "{studentId}")
-    public void updateStudent(@PathVariable Long studentId,
+    public ResponseEntity<Response> updateStudent(@PathVariable Long studentId,
                               @RequestParam(required = false) String name,
                               @RequestParam(required = false) String email){
-        studentService.updateStudentEmailName(studentId,name,email);
+
+       return  ResponseEntity.ok(
+                   Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .data(Map.of("Student", studentService.updateStudentEmailName(studentId,name,email)))
+                        .message("Student edited successfully.")
+                        .status(HttpStatus.OK)
+                        .build()
+                );
+
     }
 
     @DeleteMapping(path="{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long studentId){
+    public ResponseEntity<Response> deleteStudent(@PathVariable("studentId") Long studentId){
         studentService.deleteStudent(studentId);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .message("Student Deleted successfully.")
+                        .status(HttpStatus.OK)
+                        .build()
+        );
 
     }
 

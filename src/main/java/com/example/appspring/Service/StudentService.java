@@ -46,13 +46,15 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudentEmailName(Long id, String name, String email) {
+    public Student updateStudentEmailName(Long id, String name, String email) {
         Student student= studentRepository.findById(id)
                 .orElseThrow(() -> new ApiRequestException("Student with id "+id+" does not exist"));
         if(email != null)
             student.setEmail(email);
         if (name != null)
             student.setName(name);
+
+        return student;
 
     }
 }
