@@ -24,13 +24,14 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    @Transactional
+
     public  void addNewTeacher(Teacher teacher) {
         Optional<Teacher> studentOptional = teacherRepository.findTeacherByEmail(teacher.getEmail());
         if (studentOptional.isPresent())
             throw new ApiRequestException("This email alreaady exists.");
         teacherRepository.save(teacher);
     }
+
 
     public void deleteTeacher(Long teacherId) {
         boolean exists = teacherRepository.existsById(teacherId);
@@ -42,7 +43,7 @@ public class TeacherService {
     }
 
     @Transactional
-    public void updateTeacher(Long teacherId, String name, String email, LocalDate dob) {
+    public Teacher updateTeacher(Long teacherId, String name, String email, LocalDate dob) {
         Teacher teacher= teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new ApiRequestException("Teacher with id "+teacherId+" does not exist"));
         if(email != null)
@@ -51,6 +52,8 @@ public class TeacherService {
             teacher.setName(name);
         if(dob != null)
             teacher.setDob(dob);
+
+        return teacher;
 
     }
 
